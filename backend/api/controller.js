@@ -2,6 +2,7 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const getBrands = (req, res) => {
+  let response = [];
   fetch("https://app.socialinsider.io/api", {
     method: "POST",
     headers: {
@@ -19,7 +20,19 @@ const getBrands = (req, res) => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => res.send(data.result));
+    .then((data) => {
+      data.result.forEach((element) => {
+        response = [
+          ...response,
+          {
+            brandName: element.brandname,
+            numberOfProfiles: element.profiles.length,
+          },
+        ];
+      });
+
+      res.send(response);
+    });
 };
 
 module.exports = { getBrands };

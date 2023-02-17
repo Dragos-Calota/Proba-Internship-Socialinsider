@@ -1,0 +1,11 @@
+.table {
+    text-align: center;
+    margin: 1rem;
+}
+
+.td {
+    border-style: groove;
+    border-color: black;
+    font-size: large;
+    background-color: aqua;
+}
